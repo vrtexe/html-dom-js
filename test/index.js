@@ -1,8 +1,11 @@
 import { div, button, label, input } from '../index.js';
 
+document.body.appendChild()
+
 document.getElementById('app').appendChild(
   div({
     attributes: {
+      class: "test-class",
       'aria-label': 'Custom Control',
       onclick: (e) => {
         e.stopPropagation();
