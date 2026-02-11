@@ -1,0 +1,35 @@
+{
+  "name": "html-js",
+  "version": "1.0.0",
+  "description": "A JavaScript library for creating HTML elements",
+  "license": "MIT",
+  "author": "vrtexe",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "default": "./index.js",
+      "types": "./index.d.ts"
+    }
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "types/attributes.d.ts",
+    "types/dom.d.ts"
+  ],
+  "scripts": {
+    "start": "npx http-server . --port 3100",
+    "generate-types": "npx -p typescript tsc -p tsconfig.json"
+  },
+  "homepage": "https://github.com/vrtexe/htmljs#readme",
+  "bugs": {
+    "url": "https://github.com/vrtexe/htmljs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vrtexe/htmljs.git"
+  },
+  "packageManager": "^npm@11.6.0"
+}
