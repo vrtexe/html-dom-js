@@ -15,5 +15,5 @@
     "declaration": true,
     "lib": ["es2022", "dom", "dom.iterable"]
   },
-  "include": ["index.js"]
+  "include": ["lib/**/*.js", "lib/**/*.ts"]
 }

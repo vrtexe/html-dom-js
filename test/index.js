@@ -1,11 +1,9 @@
-import { div, button, label, input } from '../index.js';
+import { div, button, label, input } from '../lib/html.js';
 
-document.body.appendChild()
-
-document.getElementById('app').appendChild(
+document.getElementById('app')?.appendChild(
   div({
     attributes: {
-      class: "test-class",
+      class: 'test-class',
       'aria-label': 'Custom Control',
       onclick: (e) => {
         e.stopPropagation();
@@ -36,7 +34,7 @@ document.getElementById('app').appendChild(
           required: true,
         },
       }),
-      // div({ children: "Custom Control" }),
+      div({ children: ['Custom Control'] }),
       button({
         props: {
           className: 'leaflet-control-button',

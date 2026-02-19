@@ -5,19 +5,32 @@
   "license": "MIT",
   "author": "vrtexe",
   "type": "module",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "exports": {
     ".": {
-      "default": "./index.js",
-      "types": "./index.d.ts"
+      "default": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./html": {
+      "default": "./lib/html.js",
+      "types": "./lib/html.d.ts"
+    },
+    "./html/deprecated": {
+      "default": "./lib/html-deprecated.js",
+      "types": "./lib/html-deprecated.d.ts"
+    },
+    "./svg": {
+      "default": "./lib/svg.js",
+      "types": "./lib/svg.d.ts"
+    },
+    "./math": {
+      "default": "./lib/math.js",
+      "types": "./lib/math.d.ts"
     }
   },
   "files": [
-    "index.js",
-    "index.d.ts",
-    "types/attributes.d.ts",
-    "types/dom.d.ts"
+    "lib"
   ],
   "scripts": {
     "start": "npx http-server . --port 3100",
