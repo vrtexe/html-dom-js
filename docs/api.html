@@ -1,0 +1,1679 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>API reference: html-dom-js</title>
+    <meta
+      name="description"
+      content="API reference for html-dom-js: element factories, props, attributes, children, event listeners, tag functions and TypeScript declarations."
+    />
+    <link rel="canonical" href="https://vrtexe.github.io/html-dom-js/api.html" />
+    <meta name="theme-color" content="#0a0c0f" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="API reference: html-dom-js" />
+    <meta
+      property="og:description"
+      content="Element factories, props, attributes, children, event listeners and every exported tag function."
+    />
+    <meta property="og:url" content="https://vrtexe.github.io/html-dom-js/api.html" />
+    <meta property="og:image" content="https://vrtexe.github.io/html-dom-js/html-dom-social.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="API reference: html-dom-js" />
+    <meta
+      name="twitter:description"
+      content="Element factories, props, attributes, children, event listeners and every exported tag function."
+    />
+    <meta name="twitter:image" content="https://vrtexe.github.io/html-dom-js/html-dom-social.png" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23b8f26d'/%3E%3Cpath d='M12 10l-5 6 5 6M20 10l5 6-5 6' fill='none' stroke='%230a0c0f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
+    />
+    <style>
+      :root {
+        --bg: #0a0c0f;
+        --bg-2: #0d1014;
+        --surface: #11151a;
+        --surface-2: #151a20;
+        --ink: #f4f2ec;
+        --muted: #a7ada6;
+        --faint: #8a928b;
+        --line: rgba(244, 242, 236, 0.1);
+        --line-strong: rgba(244, 242, 236, 0.18);
+        --accent: #b8f26d;
+        --accent-ink: #0a0c0f;
+        --nav: 72px;
+        --wrap: 1180px;
+        --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: calc(var(--nav) + 24px);
+        scrollbar-color: #3b444d var(--bg);
+      }
+
+      ::selection {
+        background: var(--accent);
+        color: var(--accent-ink);
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        background: #3b444d;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      code,
+      pre {
+        font-family: var(--mono);
+      }
+
+      .wrap {
+        width: min(var(--wrap), calc(100% - 96px));
+        margin-inline: auto;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: 16px;
+        top: -64px;
+        z-index: 60;
+        padding: 10px 16px;
+        border-radius: 8px;
+        background: var(--accent);
+        color: var(--accent-ink);
+        font-weight: 600;
+        transition: top 160ms ease;
+      }
+
+      .skip-link:focus {
+        top: 12px;
+      }
+
+      .nav {
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 30;
+        height: var(--nav);
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        height: 100%;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--mono);
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+      }
+
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
+        background: var(--accent);
+        color: var(--accent-ink);
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: -0.06em;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        margin-left: auto;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--muted);
+      }
+
+      .nav-links a:hover {
+        color: var(--ink);
+      }
+
+      .nav-links .is-current {
+        color: var(--ink);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 44px;
+        padding: 0 18px;
+        border-radius: 9px;
+        background: var(--accent);
+        color: var(--accent-ink);
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1;
+        transition: background 160ms ease;
+      }
+
+      .btn:hover {
+        background: #c8fa8c;
+      }
+
+      /* docs shell */
+      .docs-layout {
+        display: grid;
+        grid-template-columns: 210px minmax(0, 1fr);
+        gap: 64px;
+        padding-top: 128px;
+        padding-bottom: 96px;
+      }
+
+      .docs-side {
+        align-self: start;
+        position: sticky;
+        top: 104px;
+        min-width: 0;
+        width: 100%;
+        max-height: calc(100svh - 128px);
+        overflow-y: auto;
+        padding-right: 8px;
+      }
+
+      .docs-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        max-width: 100%;
+      }
+
+      .nav-group {
+        margin: 22px 0 6px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--faint);
+      }
+
+      .nav-group:first-child {
+        margin-top: 0;
+      }
+
+      .docs-nav a {
+        padding: 5px 0;
+        font-size: 14px;
+        color: var(--muted);
+        transition: color 140ms ease;
+      }
+
+      .docs-nav a:hover,
+      .docs-nav a.is-active {
+        color: var(--accent);
+      }
+
+      .docs-main {
+        min-width: 0;
+        max-width: 840px;
+      }
+
+      .docs-head {
+        padding-bottom: 40px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(40px, 4.6vw, 60px);
+        line-height: 1.05;
+        letter-spacing: -0.035em;
+        font-weight: 680;
+      }
+
+      .docs-lead {
+        max-width: 62ch;
+        margin: 20px 0 0;
+        font-size: 18px;
+        color: var(--muted);
+      }
+
+      .docs-source {
+        margin: 22px 0 0;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--faint);
+      }
+
+      .docs-source a {
+        color: var(--muted);
+        border-bottom: 1px solid var(--line-strong);
+      }
+
+      .docs-source a:hover {
+        color: var(--accent);
+      }
+
+      .docs-main section {
+        padding-top: 64px;
+      }
+
+      h2 {
+        margin: 0 0 18px;
+        font-size: clamp(26px, 2.6vw, 34px);
+        line-height: 1.15;
+        letter-spacing: -0.025em;
+        font-weight: 660;
+      }
+
+      h3 {
+        margin: 36px 0 10px;
+        font-size: 19px;
+        line-height: 1.3;
+        letter-spacing: -0.012em;
+        font-weight: 620;
+      }
+
+      .docs-main p {
+        max-width: 72ch;
+        margin: 0 0 16px;
+        color: var(--muted);
+      }
+
+      .docs-main p strong,
+      .docs-main li strong {
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      .docs-main ul,
+      .docs-main ol {
+        max-width: 72ch;
+        margin: 0 0 18px;
+        padding-left: 22px;
+        color: var(--muted);
+      }
+
+      .docs-main li {
+        margin: 6px 0;
+      }
+
+      .docs-main code {
+        padding: 1px 5px;
+        border-radius: 4px;
+        background: rgba(244, 242, 236, 0.07);
+        font-size: 0.9em;
+        color: var(--ink);
+      }
+
+      .docs-main pre code {
+        padding: 0;
+        background: none;
+        font-size: inherit;
+        color: inherit;
+      }
+
+      .code {
+        margin: 20px 0 22px;
+        padding: 20px;
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface);
+        font-size: 13px;
+        line-height: 1.85;
+        color: #d7dce0;
+      }
+
+      .kw {
+        color: #9db7ff;
+      }
+
+      .fn {
+        color: var(--accent);
+      }
+
+      .str {
+        color: #e3c98d;
+      }
+
+      .punc {
+        color: #7d868f;
+      }
+
+      .note {
+        margin: 20px 0;
+        padding: 16px 18px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: rgba(244, 242, 236, 0.03);
+        font-size: 14.5px;
+        color: var(--muted);
+      }
+
+      .note strong {
+        color: var(--ink);
+      }
+
+      .table-wrap {
+        margin: 18px 0 22px;
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14.5px;
+        line-height: 1.55;
+      }
+
+      th {
+        padding: 11px 16px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(244, 242, 236, 0.035);
+        color: var(--muted);
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      td {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+        vertical-align: top;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      td code {
+        white-space: nowrap;
+      }
+
+      .signature {
+        margin: 18px 0;
+        padding: 18px 20px;
+        overflow-x: auto;
+        border: 1px solid var(--line-strong);
+        border-radius: 10px;
+        background: var(--surface);
+        font-size: 13.5px;
+        line-height: 1.8;
+        color: #d7dce0;
+      }
+
+      .event-list {
+        margin: 18px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .event-row {
+        display: grid;
+        grid-template-columns: 170px minmax(0, 1fr);
+        gap: 20px;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .event-row dt {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      .event-row dd {
+        margin: 0;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        line-height: 1.9;
+        color: var(--muted);
+      }
+
+      /* tag index */
+      .tag-tools {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 26px 0 8px;
+        flex-wrap: wrap;
+      }
+
+      .tag-filter {
+        width: min(100%, 300px);
+        height: 44px;
+        padding: 0 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: 9px;
+        background: var(--surface);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-size: 15px;
+      }
+
+      .tag-filter::placeholder {
+        color: var(--faint);
+      }
+
+      .tag-status {
+        margin: 0;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--faint);
+      }
+
+      .tag-group {
+        margin-top: 34px;
+      }
+
+      .tag-group[hidden] {
+        display: none;
+      }
+
+      details {
+        margin-top: 12px;
+      }
+
+      summary {
+        padding: 12px 0;
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+
+      summary:hover {
+        color: var(--accent);
+      }
+
+      details[open] summary {
+        margin-bottom: 8px;
+      }
+
+      .tag-group h3 {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        margin: 0 0 12px;
+      }
+
+      .tag-group h3 span {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 400;
+        color: var(--faint);
+      }
+
+      .tag-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0 20px;
+        border-top: 1px solid var(--line);
+      }
+
+      .tag-link {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 7px 0;
+        border-bottom: 1px solid rgba(244, 242, 236, 0.055);
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--muted);
+        transition: color 140ms ease;
+      }
+
+      .tag-link:hover {
+        color: var(--accent);
+      }
+
+      .tag-link[hidden] {
+        display: none;
+      }
+
+      .tag-link .tag-name {
+        font-size: 11px;
+        color: var(--faint);
+      }
+
+      /* footer */
+      .footer {
+        padding: 44px 0 40px;
+        border-top: 1px solid var(--line);
+      }
+
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+
+      .footer .brand {
+        font-size: 14px;
+      }
+
+      .footer .brand-mark {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+      }
+
+      .footer-note {
+        margin: 0;
+        font-size: 13px;
+        color: var(--faint);
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 22px;
+        margin-left: auto;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+
+      @media (max-width: 1100px) {
+        .tag-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 900px) {
+        .docs-layout {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 32px;
+          padding-top: 112px;
+        }
+
+        .docs-side {
+          position: static;
+          width: 100%;
+          max-height: none;
+          overflow: visible;
+          padding: 0 0 18px;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .docs-nav {
+          width: 100%;
+          max-width: 100%;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 8px 18px;
+          overflow: visible;
+          padding-bottom: 0;
+        }
+
+        .nav-group {
+          display: none;
+        }
+
+        .docs-nav a {
+          white-space: nowrap;
+          font-size: 13px;
+        }
+
+        .docs-main {
+          max-width: none;
+        }
+      }
+
+      @media (max-width: 820px) {
+        .nav-links {
+          display: none;
+        }
+
+        .nav-inner {
+          justify-content: space-between;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .wrap {
+          width: calc(100% - 40px);
+        }
+
+        h1 {
+          font-size: 40px;
+        }
+
+        .docs-lead {
+          font-size: 16.5px;
+        }
+
+        .docs-main section {
+          padding-top: 52px;
+        }
+
+        .event-row {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+
+        .tag-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .code,
+        .signature {
+          font-size: 12px;
+        }
+
+        .footer-links {
+          width: 100%;
+          margin-left: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="index.html" aria-label="html-dom-js home">
+          <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
+          html-dom-js
+        </a>
+        <nav class="nav-links" aria-label="Main">
+          <a href="index.html">Home</a>
+          <a class="is-current" href="api.html" aria-current="page">API</a>
+          <a href="https://github.com/vrtexe/html-dom-js">GitHub</a>
+        </nav>
+        <a class="btn" href="index.html#install">Get started</a>
+      </div>
+    </header>
+
+    <div class="wrap docs-layout">
+      <aside class="docs-side">
+        <nav class="docs-nav" aria-label="API sections">
+          <p class="nav-group">Start</p>
+          <a href="#overview">Overview</a>
+          <a href="#install">Install and imports</a>
+          <a href="#element">element()</a>
+
+          <p class="nav-group">Data object</p>
+          <a href="#props">props</a>
+          <a href="#attributes">attributes</a>
+          <a href="#children">children</a>
+          <a href="#event">event</a>
+
+          <p class="nav-group">Tags</p>
+          <a href="#tags">Tag functions</a>
+          <a href="#html-tags">HTML</a>
+          <a href="#svg-tags">SVG</a>
+          <a href="#mathml-tags">MathML</a>
+          <a href="#deprecated">Deprecated</a>
+
+          <p class="nav-group">Reference</p>
+          <a href="#types">TypeScript types</a>
+          <a href="#entry-points">Package entry points</a>
+        </nav>
+      </aside>
+
+      <main class="docs-main" id="main">
+        <header class="docs-head">
+          <h1>API reference</h1>
+          <p class="docs-lead">
+            Every factory takes the same data object. This page covers the four keys, event
+            handling, all exported tag functions and the package entry points.
+          </p>
+          <p class="docs-source">
+            Source of truth:
+            <a href="https://github.com/vrtexe/html-dom-js/tree/main/lib/core">lib/core</a> and
+            <a href="https://github.com/vrtexe/html-dom-js/tree/main/lib/types">lib/types</a>
+          </p>
+        </header>
+
+        <section id="overview">
+          <h2>Overview</h2>
+          <p>
+            The package creates DOM elements from function calls. <code>element(tag, data)</code>
+            is the generic HTML factory. The SVG and MathML entry points each export the same
+            function under the name <code>element</code>, and every tag also has its own named
+            function.
+          </p>
+          <div class="signature">
+            <code><span class="fn">element</span>&lt;T <span class="kw">extends</span> keyof HTMLElementTagNameMap&gt;(<br />
+            &nbsp;&nbsp;tag<span class="punc">:</span> T,<br />
+            &nbsp;&nbsp;data<span class="punc">?:</span> ElementData&lt;T&gt;,<br />
+            )<span class="punc">:</span> HTMLElementTagNameMap[T]</code>
+          </div>
+          <p>
+            A tag function has the same shape with the tag fixed. For example,
+            <code>div(data?: ElementData&lt;'div'&gt;)</code> returns <code>HTMLDivElement</code>.
+          </p>
+          <pre class="code"><code><span class="kw">import</span> { div } <span class="kw">from</span> <span class="str">'html-dom-js'</span>;
+
+<span class="kw">const</span> card <span class="punc">=</span> <span class="fn">div</span>({ children<span class="punc">:</span> <span class="str">'Hello'</span> });
+
+document.body.<span class="fn">appendChild</span>(card);</code></pre>
+          <div class="note">
+            <strong>Return value.</strong> The factory returns the native element. There is no
+            wrapper object to unwrap before appending it.
+          </div>
+        </section>
+
+        <section id="install">
+          <h2>Install and imports</h2>
+          <pre class="code"><code>npm install -D html-dom-js</code></pre>
+          <p>
+            The package is ESM. Each entry point maps to a module in <code>lib/</code>, and the
+            package has no runtime dependencies.
+          </p>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Specifier</th>
+                  <th>Module</th>
+                  <th>Exports</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>html-dom-js</code></td>
+                  <td><code>lib/html.js</code></td>
+                  <td><code>element</code>, 112 HTML tag functions, default object</td>
+                </tr>
+                <tr>
+                  <td><code>html-dom-js/html</code></td>
+                  <td><code>lib/html.js</code></td>
+                  <td>Same as the root entry</td>
+                </tr>
+                <tr>
+                  <td><code>html-dom-js/global</code></td>
+                  <td><code>lib/index.js</code></td>
+                  <td><code>html</code>, <code>svg</code>, <code>math</code>, <code>deprecatedHtml</code></td>
+                </tr>
+                <tr>
+                  <td><code>html-dom-js/svg</code></td>
+                  <td><code>lib/svg.js</code></td>
+                  <td><code>element</code> (SVG), 63 SVG tag functions, default object</td>
+                </tr>
+                <tr>
+                  <td><code>html-dom-js/math</code></td>
+                  <td><code>lib/math.js</code></td>
+                  <td><code>element</code> (MathML), 31 MathML tag functions, default object</td>
+                </tr>
+                <tr>
+                  <td><code>html-dom-js/html/deprecated</code></td>
+                  <td><code>lib/html-deprecated.js</code></td>
+                  <td><code>element</code> (deprecated), 29 tag functions, default object</td>
+                </tr>
+                <tr>
+                  <td><code>html-dom-js/type/*</code></td>
+                  <td><code>lib/types/*</code></td>
+                  <td>Type declaration files</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Named, default and namespace imports are all available:</p>
+          <pre class="code"><code><span class="kw">import</span> { div, button } <span class="kw">from</span> <span class="str">'html-dom-js'</span>;
+<span class="kw">import</span> html <span class="kw">from</span> <span class="str">'html-dom-js'</span>;
+<span class="kw">import</span> { html, svg, math } <span class="kw">from</span> <span class="str">'html-dom-js/global'</span>;
+
+html.<span class="fn">div</span>({ children<span class="punc">:</span> <span class="str">'Default object'</span> });
+svg.<span class="fn">circle</span>({ attributes<span class="punc">:</span> { r<span class="punc">:</span> <span class="str">'8'</span> } });</code></pre>
+        </section>
+
+        <section id="element">
+          <h2>element()</h2>
+          <p>
+            <code>element(tag, data)</code> creates an HTML element with
+            <code>document.createElement</code>, applies the data object in a fixed order and
+            returns the node. The <code>data</code> argument is optional.
+          </p>
+
+          <ol>
+            <li><code>props</code> is assigned first.</li>
+            <li><code>attributes</code> is applied with <code>setAttribute</code>.</li>
+            <li><code>children</code> is passed to <code>replaceChildren</code>.</li>
+            <li><code>event</code> listeners are attached last.</li>
+          </ol>
+
+          <pre class="code"><code><span class="kw">import</span> { element } <span class="kw">from</span> <span class="str">'html-dom-js'</span>;
+
+<span class="kw">const</span> panel <span class="punc">=</span> <span class="fn">element</span>(<span class="str">'section'</span>, {
+  props<span class="punc">:</span> { className<span class="punc">:</span> <span class="str">'panel'</span> },
+  attributes<span class="punc">:</span> { <span class="str">'aria-label'</span><span class="punc">:</span> <span class="str">'Details'</span> },
+  children<span class="punc">:</span> [<span class="str">'Plain text'</span>, <span class="fn">element</span>(<span class="str">'span'</span>, { children<span class="punc">:</span> <span class="str">'and a node'</span> })],
+  event<span class="punc">:</span> { click<span class="punc">:</span> () <span class="punc">=&gt;</span> console.log(<span class="str">'clicked'</span>) },
+});</code></pre>
+
+          <h3>The data object</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>Type</th>
+                  <th>Applied by</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>props</code></td>
+                  <td><code>ElementProps&lt;T&gt;</code></td>
+                  <td><code>Object.assign</code></td>
+                </tr>
+                <tr>
+                  <td><code>attributes</code></td>
+                  <td><code>HTMLElementsAttributesMap[T]</code></td>
+                  <td><code>setAttribute</code></td>
+                </tr>
+                <tr>
+                  <td><code>children</code></td>
+                  <td><code>Children</code></td>
+                  <td><code>replaceChildren</code></td>
+                </tr>
+                <tr>
+                  <td><code>event</code></td>
+                  <td><code>ElementEventData&lt;T&gt;</code></td>
+                  <td><code>addEventListener</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Every key is optional and accepts <code>undefined</code> or <code>null</code>.</p>
+        </section>
+
+        <section id="props">
+          <h2>props</h2>
+          <p>
+            <code>props</code> uses JavaScript property names. It is typed as
+            <code>ElementProps&lt;T&gt;</code>, which keeps the writable properties of the element
+            and makes them recursively partial.
+          </p>
+          <pre class="code"><code><span class="fn">div</span>({
+  props<span class="punc">:</span> {
+    className<span class="punc">:</span> <span class="str">'card'</span>,
+    textContent<span class="punc">:</span> <span class="str">'Hello'</span>,
+    style<span class="punc">:</span> {
+      padding<span class="punc">:</span> <span class="str">'16px'</span>,
+      background<span class="punc">:</span> <span class="str">'white'</span>,
+    },
+  },
+});</code></pre>
+          <p>
+            Nested objects such as <code>style</code> are collected first, then assigned to the
+            matching element property. Object keys are assigned with <code>Object.assign</code>.
+          </p>
+          <p>
+            Read-only DOM properties are excluded by the type. To set a read-only value, use a
+            writable property or an attribute instead.
+          </p>
+          <p>Source: <a class="text-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/core/base.js#L19-L34">lib/core/base.js:19</a></p>
+        </section>
+
+        <section id="attributes">
+          <h2>attributes</h2>
+          <p>
+            <code>attributes</code> uses HTML attribute names and calls
+            <code>setAttribute(key, value)</code> for each entry. Attribute values must be truthy:
+            an empty string or <code>false</code> is skipped.
+          </p>
+          <pre class="code"><code><span class="fn">input</span>({
+  attributes<span class="punc">:</span> {
+    type<span class="punc">:</span> <span class="str">'email'</span>,
+    required<span class="punc">:</span> <span class="str">'true'</span>,
+    <span class="str">'aria-label'</span><span class="punc">:</span> <span class="str">'Email address'</span>,
+    class<span class="punc">:</span> <span class="str">'field'</span>,
+  },
+});</code></pre>
+          <div class="note">
+            <strong>Boolean attributes.</strong> Pass a truthy value such as
+            <code>'true'</code>. Passing <code>''</code> or <code>false</code> skips the attribute
+            entirely.
+          </div>
+          <p>
+            Property names and attribute names differ for some elements. Use the attribute column
+            with <code>attributes</code> and the property column with <code>props</code>.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Attribute</th>
+                  <th>Property</th>
+                  <th>Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>class</code></td>
+                  <td><code>className</code></td>
+                  <td><code>attributes: { class: 'card' }</code></td>
+                </tr>
+                <tr>
+                  <td><code>for</code></td>
+                  <td><code>htmlFor</code></td>
+                  <td><code>props: { htmlFor: 'email' }</code></td>
+                </tr>
+                <tr>
+                  <td><code>tabindex</code></td>
+                  <td><code>tabIndex</code></td>
+                  <td><code>props: { tabIndex: 0 }</code></td>
+                </tr>
+                <tr>
+                  <td><code>aria-label</code></td>
+                  <td><code>ariaLabel</code></td>
+                  <td><code>attributes: { 'aria-label': 'Close' }</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Per-tag attribute types come from
+            <a class="text-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/types/attributes.d.ts">lib/types/attributes.d.ts</a>.
+            Global HTML attributes, ARIA, RDFa and tag-specific attributes are included.
+          </p>
+          <p>Source: <a class="text-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/core/base.js#L44-L56">lib/core/base.js:44</a></p>
+        </section>
+
+        <section id="children">
+          <h2>children</h2>
+          <p>
+            <code>children</code> accepts a string, an element or an array of both. The value is
+            passed to <code>replaceChildren</code>, so arrays are spread into the call.
+          </p>
+          <div class="signature"><code><span class="kw">type</span> Children <span class="punc">=</span> string | Element | (Element | string)[]</code></div>
+          <pre class="code"><code><span class="fn">div</span>({
+  children<span class="punc">:</span> [
+    <span class="str">'Status:'</span>,
+    <span class="fn">span</span>({ children<span class="punc">:</span> <span class="str">'ready'</span> }),
+  ],
+});</code></pre>
+          <p>
+            Numbers and text nodes are not part of the type. Convert a number to a string when it
+            should appear as text.
+          </p>
+          <p>Source: <a class="text-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/core/base.js#L62-L73">lib/core/base.js:62</a></p>
+        </section>
+
+        <section id="event">
+          <h2>event</h2>
+          <p>
+            <code>event</code> maps native event names to a handler. The key is the event name
+            used by <code>addEventListener</code>, such as <code>click</code>, not the property
+            name <code>onclick</code>.
+          </p>
+          <p>A value can be a function or an object with <code>handler</code> and <code>options</code>:</p>
+          <pre class="code"><code><span class="fn">button</span>({
+  children<span class="punc">:</span> <span class="str">'Save'</span>,
+  event<span class="punc">:</span> {
+    click<span class="punc">:</span> (event) <span class="punc">=&gt;</span> console.log(event.currentTarget),
+    keydown<span class="punc">:</span> {
+      handler<span class="punc">:</span> onKeyDown,
+      options<span class="punc">:</span> { once<span class="punc">:</span> <span class="kw">true</span>, capture<span class="punc">:</span> <span class="kw">false</span> },
+    },
+  },
+});</code></pre>
+          <p>
+            The handler is typed as <code>(this: T, ev: E[K]) =&gt; unknown</code>, where
+            <code>T</code> is the element and <code>E[K]</code> is the event type. The options
+            value is the same <code>boolean | AddEventListenerOptions</code> that
+            <code>addEventListener</code> accepts.
+          </p>
+          <div class="note">
+            <strong>Listener order.</strong> Listeners are attached after props, attributes and
+            children. An entry with no handler is skipped.
+          </div>
+
+          <h3>Common event keys</h3>
+          <p>
+            The type accepts any key from <code>HTMLElementEventMap</code> for HTML elements, with
+            matching event maps for SVG and MathML. These are the common keys by category.
+          </p>
+          <dl class="event-list">
+            <div class="event-row">
+              <dt>Mouse</dt>
+              <dd>click, dblclick, mousedown, mouseup, mouseenter, mouseleave, mousemove, mouseover, mouseout, contextmenu, auxclick</dd>
+            </div>
+            <div class="event-row">
+              <dt>Pointer</dt>
+              <dd>pointerdown, pointerup, pointermove, pointerenter, pointerleave, pointerover, pointerout, pointercancel, gotpointercapture, lostpointercapture</dd>
+            </div>
+            <div class="event-row">
+              <dt>Keyboard</dt>
+              <dd>keydown, keyup, keypress</dd>
+            </div>
+            <div class="event-row">
+              <dt>Focus</dt>
+              <dd>focus, blur, focusin, focusout</dd>
+            </div>
+            <div class="event-row">
+              <dt>Form</dt>
+              <dd>input, beforeinput, change, submit, reset, invalid, select</dd>
+            </div>
+            <div class="event-row">
+              <dt>Clipboard</dt>
+              <dd>copy, cut, paste</dd>
+            </div>
+            <div class="event-row">
+              <dt>Drag</dt>
+              <dd>drag, dragstart, dragend, dragenter, dragleave, dragover, drop</dd>
+            </div>
+            <div class="event-row">
+              <dt>Touch</dt>
+              <dd>touchstart, touchend, touchmove, touchcancel</dd>
+            </div>
+            <div class="event-row">
+              <dt>Wheel and scroll</dt>
+              <dd>wheel, scroll, scrollend</dd>
+            </div>
+            <div class="event-row">
+              <dt>Media</dt>
+              <dd>play, pause, playing, ended, timeupdate, volumechange, loadedmetadata, canplay, canplaythrough, waiting, stalled</dd>
+            </div>
+            <div class="event-row">
+              <dt>Animation and transition</dt>
+              <dd>animationstart, animationend, animationiteration, animationcancel, transitionstart, transitionend, transitionrun, transitioncancel</dd>
+            </div>
+            <div class="event-row">
+              <dt>Toggle and dialog</dt>
+              <dd>toggle, beforetoggle, close, cancel</dd>
+            </div>
+            <div class="event-row">
+              <dt>Fullscreen</dt>
+              <dd>fullscreenchange, fullscreenerror</dd>
+            </div>
+            <div class="event-row">
+              <dt>Load and error</dt>
+              <dd>load, error, abort</dd>
+            </div>
+          </dl>
+          <p>
+            Event reference:
+            <a class="text-link" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement#events">MDN HTMLElement events</a>
+          </p>
+          <p>Source: <a class="text-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/core/base.js#L105-L129">lib/core/base.js:105</a></p>
+        </section>
+
+        <section id="tags">
+          <h2>Tag functions</h2>
+          <p>
+            Every tag has a named export that fixes the tag and returns the matching element type.
+            The generic <code>element</code> function is always available when the tag is a
+            variable.
+          </p>
+          <div class="tag-tools">
+            <label class="sr-only" for="tag-filter">Filter tag functions</label>
+            <input
+              class="tag-filter"
+              id="tag-filter"
+              type="search"
+              placeholder="Filter tags"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <p class="tag-status" id="tag-status" role="status" aria-live="polite">235 tag functions, all entry points</p>
+          </div>
+
+          <div id="html-tags" class="tag-group">
+            <h3>HTML <span>112 functions</span></h3>
+            <div class="tag-grid">
+                            <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L12"><span>a</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L20"><span>abbr</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L28"><span>address</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L36"><span>area</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L44"><span>article</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L52"><span>aside</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L60"><span>audio</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L68"><span>b</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L76"><span>base</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L84"><span>bdi</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L92"><span>bdo</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L100"><span>blockquote</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L108"><span>body</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L116"><span>br</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L124"><span>button</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L132"><span>canvas</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L140"><span>caption</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L148"><span>cite</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L156"><span>code</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L164"><span>col</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L172"><span>colgroup</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L180"><span>data</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L188"><span>datalist</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L196"><span>dd</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L204"><span>del</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L212"><span>details</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L220"><span>dfn</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L228"><span>dialog</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L236"><span>div</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L244"><span>dl</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L252"><span>dt</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L260"><span>em</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L268"><span>embed</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L276"><span>fieldset</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L284"><span>figcaption</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L292"><span>figure</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L300"><span>footer</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L308"><span>form</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L316"><span>h1</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L324"><span>h2</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L332"><span>h3</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L340"><span>h4</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L348"><span>h5</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L356"><span>h6</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L364"><span>head</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L372"><span>header</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L380"><span>hgroup</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L388"><span>hr</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L396"><span>html</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L404"><span>i</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L412"><span>iframe</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L420"><span>img</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L428"><span>input</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L436"><span>ins</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L444"><span>kbd</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L452"><span>label</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L460"><span>legend</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L468"><span>li</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L476"><span>link</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L484"><span>main</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L492"><span>map</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L500"><span>mark</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L508"><span>menu</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L516"><span>meta</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L524"><span>meter</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L532"><span>nav</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L540"><span>noscript</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L548"><span>object</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L556"><span>ol</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L564"><span>optgroup</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L572"><span>option</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L580"><span>output</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L588"><span>p</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L596"><span>picture</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L604"><span>pre</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L612"><span>progress</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L620"><span>q</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L628"><span>rp</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L636"><span>rt</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L644"><span>ruby</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L652"><span>s</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L660"><span>samp</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L668"><span>script</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L676"><span>search</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L684"><span>section</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L692"><span>select</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L700"><span>slot</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L708"><span>small</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L716"><span>source</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L724"><span>span</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L732"><span>strong</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L740"><span>style</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L748"><span>sub</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L756"><span>summary</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L764"><span>sup</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L772"><span>table</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L780"><span>tbody</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L788"><span>td</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L796"><span>template</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L804"><span>textarea</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L812"><span>tfoot</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L820"><span>th</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L828"><span>thead</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L836"><span>time</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L844"><span>title</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L852"><span>tr</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L860"><span>track</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L868"><span>u</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L876"><span>ul</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L884"><span>var_</span> <span class="tag-name" title="creates &lt;var&gt;">var</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L892"><span>video</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html.js#L900"><span>wbr</span></a>
+            </div>
+          </div>
+
+          <div id="svg-tags" class="tag-group">
+            <h3>SVG <span>63 functions</span></h3>
+            <div class="tag-grid">
+                            <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L11"><span>a</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L19"><span>animate</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L27"><span>animateMotion</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L35"><span>animateTransform</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L43"><span>circle</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L51"><span>clipPath</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L59"><span>defs</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L67"><span>desc</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L75"><span>ellipse</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L83"><span>feBlend</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L91"><span>feColorMatrix</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L99"><span>feComponentTransfer</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L107"><span>feComposite</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L115"><span>feConvolveMatrix</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L123"><span>feDiffuseLighting</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L131"><span>feDisplacementMap</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L139"><span>feDistantLight</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L147"><span>feDropShadow</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L155"><span>feFlood</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L163"><span>feFuncA</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L171"><span>feFuncB</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L179"><span>feFuncG</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L187"><span>feFuncR</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L195"><span>feGaussianBlur</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L203"><span>feImage</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L211"><span>feMerge</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L219"><span>feMergeNode</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L227"><span>feMorphology</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L235"><span>feOffset</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L243"><span>fePointLight</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L251"><span>feSpecularLighting</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L259"><span>feSpotLight</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L267"><span>feTile</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L275"><span>feTurbulence</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L283"><span>filter</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L291"><span>foreignObject</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L299"><span>g</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L307"><span>image</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L315"><span>line</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L323"><span>linearGradient</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L331"><span>marker</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L339"><span>mask</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L347"><span>metadata</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L355"><span>mpath</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L363"><span>path</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L371"><span>pattern</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L379"><span>polygon</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L387"><span>polyline</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L395"><span>radialGradient</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L403"><span>rect</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L411"><span>script</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L419"><span>set</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L427"><span>stop</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L435"><span>style</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L443"><span>svg</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L451"><span>switch_</span> <span class="tag-name" title="creates &lt;switch&gt;">switch</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L459"><span>symbol</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L467"><span>text</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L475"><span>textPath</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L483"><span>title</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L491"><span>tspan</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L499"><span>use</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/svg.js#L507"><span>view</span></a>
+            </div>
+          </div>
+
+          <div id="mathml-tags" class="tag-group">
+            <h3>MathML <span>31 functions</span></h3>
+            <div class="tag-grid">
+                            <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L11"><span>a</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L19"><span>annotation</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L27"><span>annotationXml</span> <span class="tag-name" title="creates &lt;annotation-xml&gt;">annotation-xml</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L35"><span>maction</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L43"><span>math</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L51"><span>merror</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L59"><span>mfrac</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L67"><span>mi</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L75"><span>mmultiscripts</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L83"><span>mn</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L91"><span>mo</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L99"><span>mover</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L107"><span>mpadded</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L115"><span>mphantom</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L123"><span>mprescripts</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L131"><span>mroot</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L139"><span>mrow</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L147"><span>ms</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L155"><span>mspace</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L163"><span>msqrt</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L171"><span>mstyle</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L179"><span>msub</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L187"><span>msubsup</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L195"><span>msup</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L203"><span>mtable</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L211"><span>mtd</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L219"><span>mtext</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L227"><span>mtr</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L235"><span>munder</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L243"><span>munderover</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/math.js#L251"><span>semantics</span></a>
+            </div>
+          </div>
+        </section>
+
+        <section id="deprecated">
+          <h2>Deprecated tags</h2>
+          <p>
+            The deprecated entry point exports <code>element</code> and one function per
+            deprecated HTML tag. Every function is marked <code>@deprecated</code> in the
+            declarations.
+          </p>
+          <pre class="code"><code><span class="kw">import</span> { element, center } <span class="kw">from</span> <span class="str">'html-dom-js/html/deprecated'</span>;</code></pre>
+          <details>
+            <summary>Show 29 deprecated functions</summary>
+            <div class="tag-group">
+              <div class="tag-grid">
+                            <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L12"><span>acronym</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L21"><span>applet</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L30"><span>basefont</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L39"><span>bgsound</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L48"><span>big</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L57"><span>blink</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L66"><span>center</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L75"><span>dir</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L84"><span>font</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L93"><span>frame</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L102"><span>frameset</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L111"><span>isindex</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L120"><span>keygen</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L129"><span>listing</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L138"><span>marquee</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L147"><span>menuitem</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L156"><span>multicol</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L165"><span>nextid</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L174"><span>nobr</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L183"><span>noembed</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L192"><span>noframes</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L201"><span>param</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L210"><span>plaintext</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L219"><span>rb</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L228"><span>rtc</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L237"><span>spacer</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L246"><span>strike</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L255"><span>tt</span></a>
+              <a class="tag-link" href="https://github.com/vrtexe/html-dom-js/blob/main/lib/html-deprecated.js#L264"><span>xmp</span></a>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <section id="types">
+          <h2>TypeScript types</h2>
+          <p>
+            Declaration files are generated next to every module and referenced by the
+            <code>types</code> field. These are the public data types behind the factories.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Declaration</th>
+                  <th>Shape</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>ElementData&lt;T&gt;</code></td>
+                  <td><code>lib/types/html.dom.d.ts</code></td>
+                  <td>The four option keys</td>
+                </tr>
+                <tr>
+                  <td><code>DeprecatedElementData&lt;T&gt;</code></td>
+                  <td><code>lib/types/html.dom.d.ts</code></td>
+                  <td>The four keys for deprecated tags</td>
+                </tr>
+                <tr>
+                  <td><code>ElementEventData&lt;T, E&gt;</code></td>
+                  <td><code>lib/types/html.dom.d.ts</code></td>
+                  <td>Event map with function or options values</td>
+                </tr>
+                <tr>
+                  <td><code>DomEventListener&lt;T, K, E&gt;</code></td>
+                  <td><code>lib/types/html.dom.d.ts</code></td>
+                  <td><code>(this: T, ev: E[K]) =&gt; unknown</code></td>
+                </tr>
+                <tr>
+                  <td><code>DomEventListenerOption&lt;T, K, E&gt;</code></td>
+                  <td><code>lib/types/html.dom.d.ts</code></td>
+                  <td><code>{ handler, options }</code></td>
+                </tr>
+                <tr>
+                  <td><code>Children</code></td>
+                  <td><code>lib/types/base.dom.d.ts</code></td>
+                  <td><code>string | Element | (Element | string)[]</code></td>
+                </tr>
+                <tr>
+                  <td><code>ElementProps&lt;T&gt;</code></td>
+                  <td><code>lib/types/base.dom.d.ts</code></td>
+                  <td>Writable, recursively partial element properties</td>
+                </tr>
+                <tr>
+                  <td><code>BaseElement</code></td>
+                  <td><code>lib/types/base.dom.d.ts</code></td>
+                  <td><code>Element</code></td>
+                </tr>
+                <tr>
+                  <td><code>SVGElementData&lt;T, E&gt;</code></td>
+                  <td><code>lib/types/svg.dom.d.ts</code></td>
+                  <td>The four keys for SVG tags</td>
+                </tr>
+                <tr>
+                  <td><code>MathElementData&lt;T, E&gt;</code></td>
+                  <td><code>lib/types/math.dom.d.ts</code></td>
+                  <td>The four keys for MathML tags</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="entry-points">
+          <h2>Package entry points</h2>
+          <p>
+            The <code>exports</code> field in <code>package.json</code> defines every public
+            specifier. The package ships <code>lib/</code> only, with JavaScript and declaration
+            files side by side.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Specifier</th>
+                  <th>JavaScript</th>
+                  <th>Types</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>html-dom-js</code></td>
+                  <td><code>lib/html.js</code></td>
+                  <td><code>lib/html.d.ts</code></td>
+                </tr>
+                <tr>
+                  <td><code>html-dom-js/html</code></td>
+                  <td><code>lib/html.js</code></td>
+                  <td><code>lib/html.d.ts</code></td>
+                </tr>
+                <tr>
+                  <td><code>html-dom-js/global</code></td>
+                  <td><code>lib/index.js</code></td>
+                  <td><code>lib/index.d.ts</code></td>
+                </tr>
+                <tr>
+                  <td><code>html-dom-js/svg</code></td>
+                  <td><code>lib/svg.js</code></td>
+                  <td><code>lib/svg.d.ts</code></td>
+                </tr>
+                <tr>
+                  <td><code>html-dom-js/math</code></td>
+                  <td><code>lib/math.js</code></td>
+                  <td><code>lib/math.d.ts</code></td>
+                </tr>
+                <tr>
+                  <td><code>html-dom-js/html/deprecated</code></td>
+                  <td><code>lib/html-deprecated.js</code></td>
+                  <td><code>lib/html-deprecated.d.ts</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Release notes are on the
+            <a class="text-link" href="https://github.com/vrtexe/html-dom-js/releases">GitHub releases page</a>.
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <a class="brand" href="index.html" aria-label="html-dom-js home">
+          <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
+          html-dom-js
+        </a>
+        <p class="footer-note">MIT licensed. Source on GitHub.</p>
+        <div class="footer-links">
+          <a href="https://www.npmjs.com/package/html-dom-js">npm</a>
+          <a href="https://github.com/vrtexe/html-dom-js">GitHub</a>
+          <a href="https://github.com/vrtexe/html-dom-js/issues">Issues</a>
+          <a href="https://github.com/vrtexe/html-dom-js/releases">Releases</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        const input = document.querySelector("#tag-filter");
+        const status = document.querySelector("#tag-status");
+        const links = [...document.querySelectorAll(".tag-link")];
+        const groups = [...document.querySelectorAll(".tag-group")];
+        const total = links.length;
+
+        const applyFilter = () => {
+          const query = input.value.trim().toLowerCase();
+          let visible = 0;
+
+          for (const link of links) {
+            const match = !query || link.textContent.toLowerCase().includes(query);
+            link.hidden = !match;
+            if (match) visible += 1;
+          }
+
+          for (const group of groups) {
+            group.hidden = !group.querySelector(".tag-link:not([hidden])");
+          }
+
+          status.textContent =
+            query && visible !== total
+              ? `${visible} of ${total} tag functions`
+              : `${total} tag functions, all entry points`;
+        };
+
+        input.addEventListener("input", applyFilter);
+        applyFilter();
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "/" && document.activeElement !== input) {
+            event.preventDefault();
+            input.focus();
+          }
+        });
+
+        const navLinks = [...document.querySelectorAll(".docs-nav a")];
+        const sections = navLinks
+          .map((link) => document.querySelector(link.getAttribute("href")))
+          .filter(Boolean);
+
+        const setActive = () => {
+          let current = sections[0];
+          for (const section of sections) {
+            if (section.getBoundingClientRect().top <= 140) current = section;
+          }
+          for (const link of navLinks) {
+            const active = link.getAttribute("href") === `#${current.id}`;
+            link.classList.toggle("is-active", active);
+            if (active) {
+              link.setAttribute("aria-current", "true");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          }
+        };
+
+        let scheduled = false;
+        window.addEventListener("scroll", () => {
+          if (scheduled) return;
+          scheduled = true;
+          requestAnimationFrame(() => {
+            setActive();
+            scheduled = false;
+          });
+        });
+        setActive();
+      })();
+    </script>
+  </body>
+</html>

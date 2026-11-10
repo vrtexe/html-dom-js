@@ -1,6 +1,20 @@
 # html-dom-js
 
-[![issues](https://img.shields.io/github/issues/vrtexe/html-dom-js.svg?style=flat-square)](https://www.npmjs.com/package/html-dom-js) [![npm](https://img.shields.io/npm/v/html-dom-js.svg?style=flat-square)](https://www.npmjs.com/package/html-dom-js) [![mit](https://img.shields.io/npm/l/html-dom-js.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+Create HTML, SVG and MathML elements in JavaScript with one function per tag.
+
+[![npm version](https://img.shields.io/npm/v/html-dom-js.svg?style=flat-square)](https://www.npmjs.com/package/html-dom-js)
+[![types](https://img.shields.io/npm/types/html-dom-js.svg?style=flat-square)](https://github.com/vrtexe/html-dom-js/blob/main/lib/html.d.ts)
+[![license](https://img.shields.io/npm/l/html-dom-js.svg?style=flat-square)](https://github.com/vrtexe/html-dom-js/blob/main/LICENSE.md)
+[![issues](https://img.shields.io/github/issues/vrtexe/html-dom-js.svg?style=flat-square)](https://github.com/vrtexe/html-dom-js/issues)
+
+## Why this library
+
+- **Native elements, not wrappers.** `element()` calls `document.createElement(tag)` and returns that node, so there is nothing to unwrap before it goes into the DOM (`lib/core/html.js:17`, `lib/core/html.js:24`).
+- **Four inputs in a fixed order.** `props`, `attributes`, `children` and `event` are applied in that order to every element (`lib/core/html.js:19-22`).
+- **Nested props are assigned in place.** Objects such as `style` are walked with a queue and merged with `Object.assign`, so `style: { height: '100vh' }` reaches the element's style object (`lib/core/base.js:16-35`).
+- **Children accept a node, a string or an array.** `replaceChildren` spreads arrays and passes anything else straight through (`lib/core/base.js:62-73`).
+- **Listeners take options.** An event value can be a function, or an object with `handler` and `options` for `addEventListener` (`lib/core/base.js:115-127`).
+- **Typed per tag.** `element()` is generic over `HTMLElementTagNameMap` and returns the mapped element type, and the same pattern covers SVG and MathML (`lib/core/html.d.ts:8`, `lib/core/svg.d.ts:8`, `lib/core/math.d.ts:8`).
 
 ## Install
 
@@ -132,6 +146,10 @@ import { svg, html } from 'html-dom-js/global';
 
 > The mdn javascript/html documentation applies here
 > Typescript support and declaration files are included
+
+## Releases
+
+Release notes are on the [GitHub releases page](https://github.com/vrtexe/html-dom-js/releases).
 
 ## License
 

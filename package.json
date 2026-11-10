@@ -1,10 +1,24 @@
 {
   "name": "html-dom-js",
   "version": "1.1.2",
-  "description": "A JavaScript library for creating HTML elements",
+  "description": "Create HTML, SVG and MathML elements in JavaScript with one function per tag. Typed props, attributes, children and event listeners, no runtime dependencies.",
   "license": "MIT",
   "author": "vrtexe",
   "type": "module",
+  "keywords": [
+    "html",
+    "dom",
+    "html-elements",
+    "dom-elements",
+    "createelement",
+    "javascript",
+    "typescript",
+    "svg",
+    "mathml",
+    "dom-builder",
+    "zero-dependencies",
+    "browser"
+  ],
   "main": "lib/html.js",
   "types": "lib/html.d.ts",
   "exports": {
