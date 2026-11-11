@@ -1,44 +1,52 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+# Publishes to npm with trusted publishing (OIDC), so no npm token is stored in this repository.
+# npmjs.com must have the trusted publisher configured for vrtexe/html-dom-js with workflow
+# npm-publish.yml and the "Allow npm publish" action enabled.
 
 name: publish
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
-  build:
+  version:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: main
       - uses: actions/setup-node@v6
         with:
           node-version: 24
+          package-manager-cache: false
       - run: |
-             npm version $APP_VERSION --no-git-tag-version --allow-same-version
-             git config user.name "github-actions[bot]"
-             git config user.email "htmljs+github-actions[bot]@users.noreply.github.com"
-             git add package.json package-lock.json
-             git commit -m "Release version $APP_VERSION" || true
-             git push -u origin HEAD:main
-        env: 
-         APP_VERSION: ${{ github.event.release.tag_name }}
+          npm version "$APP_VERSION" --no-git-tag-version --allow-same-version
+          git config user.name "github-actions[bot]"
+          git config user.email "htmljs+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "Release version $APP_VERSION" || true
+          git push origin HEAD:main
+        env:
+          APP_VERSION: ${{ github.event.release.tag_name }}
 
-  publish-npm:
-    needs: build
+  publish:
+    needs: version
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
       - uses: actions/setup-node@v6
         with:
           node-version: 24
-          registry-url: https://registry.npmjs.org/
-      - run: npm version $APP_VERSION --no-git-tag-version --allow-same-version
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+      - run: npm version "$APP_VERSION" --no-git-tag-version --allow-same-version
         env:
           APP_VERSION: ${{ github.event.release.tag_name }}
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
-          
-          
