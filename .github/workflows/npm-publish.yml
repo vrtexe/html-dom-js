@@ -1,6 +1,7 @@
-# Publishes to npm with trusted publishing (OIDC), so no npm token is stored in this repository.
-# npmjs.com must have the trusted publisher configured for vrtexe/html-dom-js with workflow
-# npm-publish.yml and the "Allow npm publish" action enabled.
+# Stages a release on npm with trusted publishing (OIDC), so no npm token is stored in this
+# repository. npmjs.com must have the trusted publisher configured for vrtexe/html-dom-js with
+# workflow npm-publish.yml; "npm stage publish" is allowed by default. A maintainer then approves
+# the staged version with 2FA on npmjs.com or with `npm stage approve <stage-id>`.
 
 name: publish
 
@@ -49,4 +50,4 @@ jobs:
       - run: npm version "$APP_VERSION" --no-git-tag-version --allow-same-version
         env:
           APP_VERSION: ${{ github.event.release.tag_name }}
-      - run: npm publish
+      - run: npm stage publish
