@@ -818,7 +818,7 @@
             A tag function has the same shape with the tag fixed. For example,
             <code>div(data?: ElementData&lt;'div'&gt;)</code> returns <code>HTMLDivElement</code>.
           </p>
-          <pre class="code"><code><span class="kw">import</span> { div } <span class="kw">from</span> <span class="str">'fiore'</span>;
+          <pre class="code"><code><span class="kw">import</span> { div } <span class="kw">from</span> <span class="str">'fiorejs'</span>;
 
 <span class="kw">const</span> card <span class="punc">=</span> <span class="fn">div</span>({ children<span class="punc">:</span> <span class="str">'Hello'</span> });
 
@@ -831,7 +831,7 @@ document.body.<span class="fn">appendChild</span>(card);</code></pre>
 
         <section id="install">
           <h2>Install and imports</h2>
-          <pre class="code"><code>npm install -D fiore</code></pre>
+          <pre class="code"><code>npm install -D fiorejs</code></pre>
           <p>
             The package is ESM. Each entry point maps to a module in <code>lib/</code>, and the
             package has no runtime dependencies.
@@ -848,37 +848,37 @@ document.body.<span class="fn">appendChild</span>(card);</code></pre>
               </thead>
               <tbody>
                 <tr>
-                  <td><code>fiore</code></td>
+                  <td><code>fiorejs</code></td>
                   <td><code>lib/html.js</code></td>
                   <td><code>element</code>, 112 HTML tag functions, default object</td>
                 </tr>
                 <tr>
-                  <td><code>fiore/html</code></td>
+                  <td><code>fiorejs/html</code></td>
                   <td><code>lib/html.js</code></td>
                   <td>Same as the root entry</td>
                 </tr>
                 <tr>
-                  <td><code>fiore/global</code></td>
+                  <td><code>fiorejs/global</code></td>
                   <td><code>lib/index.js</code></td>
                   <td><code>html</code>, <code>svg</code>, <code>math</code>, <code>deprecatedHtml</code></td>
                 </tr>
                 <tr>
-                  <td><code>fiore/svg</code></td>
+                  <td><code>fiorejs/svg</code></td>
                   <td><code>lib/svg.js</code></td>
                   <td><code>element</code> (SVG), 63 SVG tag functions, default object</td>
                 </tr>
                 <tr>
-                  <td><code>fiore/math</code></td>
+                  <td><code>fiorejs/math</code></td>
                   <td><code>lib/math.js</code></td>
                   <td><code>element</code> (MathML), 31 MathML tag functions, default object</td>
                 </tr>
                 <tr>
-                  <td><code>fiore/html/deprecated</code></td>
+                  <td><code>fiorejs/html/deprecated</code></td>
                   <td><code>lib/html-deprecated.js</code></td>
                   <td><code>element</code> (deprecated), 29 tag functions, default object</td>
                 </tr>
                 <tr>
-                  <td><code>fiore/type/*</code></td>
+                  <td><code>fiorejs/type/*</code></td>
                   <td><code>lib/types/*</code></td>
                   <td>Type declaration files</td>
                 </tr>
@@ -887,9 +887,9 @@ document.body.<span class="fn">appendChild</span>(card);</code></pre>
           </div>
 
           <p>Named, default and namespace imports are all available:</p>
-          <pre class="code"><code><span class="kw">import</span> { div, button } <span class="kw">from</span> <span class="str">'fiore'</span>;
-<span class="kw">import</span> html <span class="kw">from</span> <span class="str">'fiore'</span>;
-<span class="kw">import</span> { html, svg, math } <span class="kw">from</span> <span class="str">'fiore/global'</span>;
+          <pre class="code"><code><span class="kw">import</span> { div, button } <span class="kw">from</span> <span class="str">'fiorejs'</span>;
+<span class="kw">import</span> html <span class="kw">from</span> <span class="str">'fiorejs'</span>;
+<span class="kw">import</span> { html, svg, math } <span class="kw">from</span> <span class="str">'fiorejs/global'</span>;
 
 html.<span class="fn">div</span>({ children<span class="punc">:</span> <span class="str">'Default object'</span> });
 svg.<span class="fn">circle</span>({ attributes<span class="punc">:</span> { r<span class="punc">:</span> <span class="str">'8'</span> } });</code></pre>
@@ -910,7 +910,7 @@ svg.<span class="fn">circle</span>({ attributes<span class="punc">:</span> { r<s
             <li><code>event</code> listeners are attached last.</li>
           </ol>
 
-          <pre class="code"><code><span class="kw">import</span> { element } <span class="kw">from</span> <span class="str">'fiore'</span>;
+          <pre class="code"><code><span class="kw">import</span> { element } <span class="kw">from</span> <span class="str">'fiorejs'</span>;
 
 <span class="kw">const</span> panel <span class="punc">=</span> <span class="fn">element</span>(<span class="str">'section'</span>, {
   props<span class="punc">:</span> { className<span class="punc">:</span> <span class="str">'panel'</span> },
@@ -1420,7 +1420,7 @@ svg.<span class="fn">circle</span>({ attributes<span class="punc">:</span> { r<s
             deprecated HTML tag. Every function is marked <code>@deprecated</code> in the
             declarations.
           </p>
-          <pre class="code"><code><span class="kw">import</span> { element, center } <span class="kw">from</span> <span class="str">'fiore/html/deprecated'</span>;</code></pre>
+          <pre class="code"><code><span class="kw">import</span> { element, center } <span class="kw">from</span> <span class="str">'fiorejs/html/deprecated'</span>;</code></pre>
           <details>
             <summary>Show 29 deprecated functions</summary>
             <div class="tag-group">
@@ -1548,32 +1548,32 @@ svg.<span class="fn">circle</span>({ attributes<span class="punc">:</span> { r<s
               </thead>
               <tbody>
                 <tr>
-                  <td><code>fiore</code></td>
+                  <td><code>fiorejs</code></td>
                   <td><code>lib/html.js</code></td>
                   <td><code>lib/html.d.ts</code></td>
                 </tr>
                 <tr>
-                  <td><code>fiore/html</code></td>
+                  <td><code>fiorejs/html</code></td>
                   <td><code>lib/html.js</code></td>
                   <td><code>lib/html.d.ts</code></td>
                 </tr>
                 <tr>
-                  <td><code>fiore/global</code></td>
+                  <td><code>fiorejs/global</code></td>
                   <td><code>lib/index.js</code></td>
                   <td><code>lib/index.d.ts</code></td>
                 </tr>
                 <tr>
-                  <td><code>fiore/svg</code></td>
+                  <td><code>fiorejs/svg</code></td>
                   <td><code>lib/svg.js</code></td>
                   <td><code>lib/svg.d.ts</code></td>
                 </tr>
                 <tr>
-                  <td><code>fiore/math</code></td>
+                  <td><code>fiorejs/math</code></td>
                   <td><code>lib/math.js</code></td>
                   <td><code>lib/math.d.ts</code></td>
                 </tr>
                 <tr>
-                  <td><code>fiore/html/deprecated</code></td>
+                  <td><code>fiorejs/html/deprecated</code></td>
                   <td><code>lib/html-deprecated.js</code></td>
                   <td><code>lib/html-deprecated.d.ts</code></td>
                 </tr>
@@ -1596,7 +1596,7 @@ svg.<span class="fn">circle</span>({ attributes<span class="punc">:</span> { r<s
         </a>
         <p class="footer-note">MIT licensed. Source on GitHub.</p>
         <div class="footer-links">
-          <a href="https://www.npmjs.com/package/fiore">npm</a>
+          <a href="https://www.npmjs.com/package/fiorejs">npm</a>
           <a href="https://github.com/vrtexe/fiore">GitHub</a>
           <a href="https://github.com/vrtexe/fiore/issues">Issues</a>
           <a href="https://github.com/vrtexe/fiore/releases">Releases</a>
