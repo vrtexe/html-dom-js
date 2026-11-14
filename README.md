@@ -1,11 +1,11 @@
-# html-dom-js
+# fiore
 
 Create HTML, SVG and MathML elements in JavaScript with one function per tag.
 
-[![npm version](https://img.shields.io/npm/v/html-dom-js.svg?style=flat-square)](https://www.npmjs.com/package/html-dom-js)
-[![types](https://img.shields.io/npm/types/html-dom-js.svg?style=flat-square)](https://github.com/vrtexe/html-dom-js/blob/main/lib/html.d.ts)
-[![license](https://img.shields.io/npm/l/html-dom-js.svg?style=flat-square)](https://github.com/vrtexe/html-dom-js/blob/main/LICENSE.md)
-[![issues](https://img.shields.io/github/issues/vrtexe/html-dom-js.svg?style=flat-square)](https://github.com/vrtexe/html-dom-js/issues)
+[![npm version](https://img.shields.io/npm/v/fiore.svg?style=flat-square)](https://www.npmjs.com/package/fiore)
+[![types](https://img.shields.io/npm/types/fiore.svg?style=flat-square)](https://github.com/vrtexe/fiore/blob/main/lib/html.d.ts)
+[![license](https://img.shields.io/npm/l/fiore.svg?style=flat-square)](https://github.com/vrtexe/fiore/blob/main/LICENSE.md)
+[![issues](https://img.shields.io/github/issues/vrtexe/fiore.svg?style=flat-square)](https://github.com/vrtexe/fiore/issues)
 
 ## Why this library
 
@@ -19,7 +19,7 @@ Create HTML, SVG and MathML elements in JavaScript with one function per tag.
 ## Install
 
 ```sh
-npm install -D html-dom-js
+npm install -D fiore
 ```
 
 ## Description
@@ -29,7 +29,7 @@ A simple library for creating `html` elements in javascript, uses javascript to 
 ## Usage
 
 ```js
-import { div, button, label, input } from 'html-dom-js';
+import { div, button, label, input } from 'fiore';
 
 document.body.appendChild(
   div({
@@ -103,7 +103,7 @@ Every tag has its own method defined, the general `element` function can be used
 Example:
 
 ```js
-import { element } from 'html-dom-js';
+import { element } from 'fiore';
 
 document.body.appendChild(
   element('div', {
@@ -120,7 +120,7 @@ Some properties can be defined in multiple ways, the main options are applied in
 - `event` - The event listeners are attached last.
 
 ```js
-import { element } from 'html-dom-js';
+import { element } from 'fiore';
 
 document.body.appendChild(
   element('div', {
@@ -137,11 +137,11 @@ document.body.appendChild(
 Import styles:
 
 ```js
-import { element } from 'html-dom-js';
-import { element } from 'html-dom-js/html';
-import h from 'html-dom-js/html';
-import svg from 'html-dom-js/svg';
-import { svg, html } from 'html-dom-js/global';
+import { element } from 'fiore';
+import { element } from 'fiore/html';
+import h from 'fiore/html';
+import svg from 'fiore/svg';
+import { svg, html } from 'fiore/global';
 ```
 
 > The mdn javascript/html documentation applies here
@@ -149,8 +149,8 @@ import { svg, html } from 'html-dom-js/global';
 
 ## Releases
 
-Release notes are on the [GitHub releases page](https://github.com/vrtexe/html-dom-js/releases).
+Release notes are on the [GitHub releases page](https://github.com/vrtexe/fiore/releases).
 
 ## License
 
-[MIT](https://github.com/vrtexe/html-dom-js/blob/main/LICENSE.md)
+[MIT](https://github.com/vrtexe/fiore/blob/main/LICENSE.md)
