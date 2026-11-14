@@ -22,6 +22,8 @@ Create HTML, SVG and MathML elements in JavaScript with one function per tag.
 npm install -D fiorejs
 ```
 
+> Fiore was published as `html-dom-js` up to version 1.1.2. The API is unchanged: replace `html-dom-js` with `fiorejs` in your dependencies and imports.
+
 ## Description
 
 A simple library for creating `html` elements in javascript, uses javascript to initialize the properties of elements and no state handling or reactive object are created.
