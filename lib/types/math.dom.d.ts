@@ -1,11 +1,11 @@
-import type { HTMLElementsAttributesMap } from './attributes';
-import type { Children, ElementProps } from './base.dom';
+import type { HTMLElementsAttributesMap } from './attributes.d.ts';
+import type { Children, CustomEventData, ElementProps } from './base.dom.d.ts';
 
 export type MathDomEventListener<
   T extends MathMLElement,
   K extends keyof E,
   E extends MathMLElementEventMap = MathMLElementEventMap,
-> = (this: T, ev: E[K]) => unknown;
+> = (this: T, ev: E[K] & { readonly currentTarget: T }) => unknown;
 
 export type MathDomEventListenerOption<
   T extends MathMLElement,
@@ -25,7 +25,7 @@ export type MathElementEventData<
     | MathDomEventListenerOption<T, K, E>
     | undefined
     | null;
-};
+} & CustomEventData<T>;
 
 export type MathElementData<
   T extends keyof MathMLElementTagNameMap,

@@ -189,5 +189,5 @@ declare namespace _default {
     export { semantics };
 }
 export default _default;
-import type { MathElementData } from './types/math.dom';
+import type { MathElementData } from './types/math.dom.js';
 import { mathElement } from './core/math.js';

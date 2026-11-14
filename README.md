@@ -136,6 +136,41 @@ document.body.appendChild(
 );
 ```
 
+### Events
+
+Each element accepts the events of its own event map, so `body` takes window events such as `popstate`, and `video` takes media events such as `encrypted`. In a listener, `this` and `event.currentTarget` are typed as the element.
+
+```js
+import { input } from 'fiorejs';
+
+input({
+  event: {
+    input: (event) => console.log(event.currentTarget.value),
+    keydown: { handler: (event) => console.log(event.key), options: { once: true } },
+  },
+});
+```
+
+Custom event names that contain a hyphen are accepted on every element and typed as `CustomEvent`. Annotate the parameter to type its `detail`:
+
+```ts
+div({
+  event: {
+    'cart-add': (event: CustomEvent<{ sku: string }>) => console.log(event.detail.sku),
+  },
+});
+```
+
+For a custom event name without a hyphen, add it to the global event map:
+
+```ts
+declare global {
+  interface HTMLElementEventMap {
+    itemselected: CustomEvent<{ id: number }>;
+  }
+}
+```
+
 Import styles:
 
 ```js

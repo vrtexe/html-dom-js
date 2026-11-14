@@ -57,7 +57,7 @@
   "scripts": {
     "start": "npx http-server . --port 3100",
     "clean-types": "node ./clean-types.js",
-    "generate-types": "npm run clean-types && npx -p typescript tsc -p tsconfig.json"
+    "generate-types": "npm run clean-types && npx -p typescript@5.9 tsc -p tsconfig.json"
   },
   "homepage": "https://github.com/vrtexe/fiore#readme",
   "bugs": {

@@ -1,4 +1,4 @@
-import type { HTMLElementsAttributesMap } from './attributes';
+import type { HTMLElementsAttributesMap } from './attributes.d.ts';
 
 export type IfEquals<X, Y, A = X, B = never> =
   (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? A : B;
@@ -33,3 +33,19 @@ export type ElementProps<T extends BaseElement> = PickWritable<
 >;
 
 export type BaseElement = Element;
+
+export type CustomEventListener<T extends BaseElement> = (
+  this: T,
+  ev: CustomEvent & { readonly currentTarget: T },
+) => unknown;
+
+export type CustomEventData<T extends BaseElement> = {
+  [name: `${string}-${string}`]:
+    | CustomEventListener<T>
+    | {
+        handler?: CustomEventListener<T> | undefined | null;
+        options?: boolean | AddEventListenerOptions | undefined | null;
+      }
+    | undefined
+    | null;
+};
