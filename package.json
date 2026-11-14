@@ -1,6 +1,6 @@
 {
   "name": "fiorejs",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Create HTML, SVG and MathML elements in JavaScript with one function per tag. Typed props, attributes, children and event listeners, no runtime dependencies.",
   "license": "MIT",
   "author": "vrtexe",
